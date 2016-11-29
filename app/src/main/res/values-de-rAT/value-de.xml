@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Unsere erste Aufgabe</string>
+    <string name="edit_message">Nachricht eingeben</string>
+    <string name="button_send" translatable="false">Send</string>
+</resources>
