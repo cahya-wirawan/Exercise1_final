@@ -105,11 +105,12 @@ public class MainActivity extends AppCompatActivity {
         // prepare call in Retrofit 2.0
         ShortMessageProvider smp = retrofit.create(ShortMessageProvider.class);
 
+        String aesKey = getString(R.string.aesKey); // 128 bit key
+        String aesIV = getString(R.string.aesIV); // 16 bytes IV
 
         String consumerKey = getString(R.string.consumerKey);
 
-        decodedBytes = Base64.decode(consumerKey.getBytes(), Base64.DEFAULT);
-        consumerKey = new String(decodedBytes);
+        consumerKey = decrypt(aesKey, aesIV, consumerKey);
 
         Call<ShortMessages> call = smp.getShortMessages(consumerKey);
         //call.enqueue();
