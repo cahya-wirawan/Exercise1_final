@@ -4,6 +4,6 @@
     <string name="edit_message">Enter message</string>
     <string name="button_send" translatable="true">Send</string>
     <string name="latest_message">Last Message</string>
-    <string name="consumerKey" translatable="false">ZWJlaGF1c3Zv</string>
-    <string name="consumerSecret" translatable="false">MTIzNDU=</string>
+    <string name="consumerKey" translatable="false">ZWJlaGF1c3Zv</string> // = base64 of "ebehausvo"
+    <string name="consumerSecret" translatable="false">MTIzNDU=</string>  // = base64 of "12345"
 </resources>
