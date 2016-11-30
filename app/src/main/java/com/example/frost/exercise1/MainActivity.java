@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
+        byte[] decodedBytes;
+
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
@@ -49,8 +52,19 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         ShortMessageProvider smp = retrofit.create(ShortMessageProvider.class);
         SendShortMessageModel myModel = new SendShortMessageModel();
-        myModel.setConsumerSecret("12345");
-        myModel.setConsumerKey("ebehausvo");
+
+        // get base64 decoded consumerKey and consumerSecret from string.xml
+        String consumerKey = getString(R.string.consumerKey);
+        String consumerSecret = getString(R.string.consumerSecret);
+
+        // convert base64 decoded string to normal string
+        decodedBytes = Base64.decode(consumerSecret.getBytes(), Base64.DEFAULT);
+        consumerSecret = new String(decodedBytes);
+        decodedBytes = Base64.decode(consumerKey.getBytes(), Base64.DEFAULT);
+        consumerKey = new String(decodedBytes);
+
+        myModel.setConsumerSecret(consumerSecret);
+        myModel.setConsumerKey(consumerKey);
         myModel.setText(message);
         Call<ShortMessageModel> call = smp.sendShortMessage(myModel);
 
