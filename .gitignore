@@ -51,3 +51,6 @@ captures/
 gen-external-apklibs
 
 .DS_Store
+
+# Keystore
+keystore.properties
