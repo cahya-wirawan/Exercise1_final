@@ -4,6 +4,8 @@
     <string name="edit_message">Enter message</string>
     <string name="button_send" translatable="true">Send</string>
     <string name="latest_message">Last Message</string>
-    <string name="consumerKey" translatable="false">ZWJlaGF1c3Zv</string> // = base64 of "ebehausvo"
-    <string name="consumerSecret" translatable="false">MTIzNDU=</string>  // = base64 of "12345"
+    <string name="consumerKey" translatable="false">jFnA1/H3TO70JNcgVAzfdQ==</string> // = aes and base64 of "ebehausvo"
+    <string name="consumerSecret" translatable="false">aq8Vf1zq+ME+fiGJhgmA5A==</string>  // = aes and base64 of "12345"
+    <string name="aesKey" translatable="false">Bar12345Bar12345</string> //
+    <string name="aesIV" translatable="false">RandomInitVector</string>  //
 </resources>

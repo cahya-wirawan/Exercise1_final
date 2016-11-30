@@ -22,6 +22,9 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+import static android.R.attr.key;
+import static com.example.frost.exercise1.Encryptor.decrypt;
+
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     @Override
@@ -53,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
         ShortMessageProvider smp = retrofit.create(ShortMessageProvider.class);
         SendShortMessageModel myModel = new SendShortMessageModel();
 
+        String aesKey = getString(R.string.aesKey); // 128 bit key
+        String aesIV = getString(R.string.aesIV); // 16 bytes IV
+
         // get base64 decoded consumerKey and consumerSecret from string.xml
         String consumerKey = getString(R.string.consumerKey);
         String consumerSecret = getString(R.string.consumerSecret);
 
-        // convert base64 decoded string to normal string
-        decodedBytes = Base64.decode(consumerSecret.getBytes(), Base64.DEFAULT);
-        consumerSecret = new String(decodedBytes);
-        decodedBytes = Base64.decode(consumerKey.getBytes(), Base64.DEFAULT);
-        consumerKey = new String(decodedBytes);
+        consumerKey = decrypt(aesKey, aesIV, consumerKey);
+        consumerSecret = decrypt(aesKey, aesIV, consumerSecret);
 
         myModel.setConsumerSecret(consumerSecret);
         myModel.setConsumerKey(consumerKey);
