@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getLastMessage(View view){
+        byte[] decodedBytes;
         TextView tv = (TextView) findViewById(R.id.latest_message);
 
         //create connection
@@ -101,7 +102,13 @@ public class MainActivity extends AppCompatActivity {
         // prepare call in Retrofit 2.0
         ShortMessageProvider smp = retrofit.create(ShortMessageProvider.class);
 
-        Call<ShortMessages> call = smp.getShortMessages("ebehausvo");
+
+        String consumerKey = getString(R.string.consumerKey);
+
+        decodedBytes = Base64.decode(consumerKey.getBytes(), Base64.DEFAULT);
+        consumerKey = new String(decodedBytes);
+
+        Call<ShortMessages> call = smp.getShortMessages(consumerKey);
         //call.enqueue();
         call.enqueue(new Callback<ShortMessages>() {
             @Override
